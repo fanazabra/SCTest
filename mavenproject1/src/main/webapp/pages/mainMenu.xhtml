@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>   
+</h:head>
+ 
+<h:body>
+    <div style = "height: 35px; width: 96%; position: absolute; top: 1px;">
+            <p:panel style="height: 100%; width: 100%;">
+                <div style="height: 20px; width: 50%;position: absolute; top: 1px;">          
+                    <h:form>
+                        <p:commandButton style ="width: 96%;" value="Список счетов" action="#{mainMenuBean.getAccountList()}"/>
+                    </h:form>
+                </div>
+
+                <div style="width: 50%; height: 20px; position: absolute; left: 50%; top: 1px;">
+                    <h:form>
+                        <p:commandButton style ="width: 96%;" value="Список клиентов" action="#{mainMenuBean.getClientList()}"/>
+                    </h:form>
+                 </div> 
+            </p:panel>
+    </div>
+</h:body>
+</html>

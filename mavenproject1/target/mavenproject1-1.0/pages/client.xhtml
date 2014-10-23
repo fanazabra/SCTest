@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>    
+</h:head>
+ 
+<h:body>
+    <div style = "height: 35px; width: 96%; position: absolute; top: 1px;">
+            <p:panel style="height: 100%; width: 100%;">
+                <div style="height: 20px; width: 50%;position: absolute; top: 1px;">          
+                    <h:form>
+                        <p:commandButton style ="width: 96%;" value="Список счетов" action="#{mainMenuBean.getAccountList()}"/>
+                    </h:form>
+                </div>
+
+                <div style="width: 50%; height: 20px; position: absolute; left: 50%; top: 1px;">
+                    <h:form>
+                        <p:commandButton style ="width: 96%;" value="Список клиентов" action="#{mainMenuBean.getClientList()}"/>
+                    </h:form>
+                 </div> 
+            </p:panel>
+    </div>
+    
+    <h:form>
+        <div style="position: relative; top: 50px;">
+            <p:messages style="font-size: 15px;" autoUpdate="true" id="clientMessages"/>
+        </div>
+        <div style = "position: relative; top: 50px; width: 96%; height: 100%">
+            <p:panel style="height: 100%; width: 100%;">
+                <p:commandButton style = "width: 200px; font-size: 12px; left: 80%;" value="Добавить клиента" action="#{clientsBackBean.addClient}"/>
+                <p:dataTable id = "clients" style = "position: absolute; top: 55px; width: 96%;" value= "#{clientsBackBean.clientsList}" var="client">                       
+                    <f:facet name="header">
+                        <h:outputText value="Список Клиентов"/>
+                    </f:facet>
+                    <p:column style = "font-size: 15px">
+                        <f:facet name="header">
+                            <h:outputText value="Идентификатор"/>
+                        </f:facet>
+                        <h:outputText value="#{client.clientId}"/>
+                    </p:column>
+                    <p:column style = "font-size: 15px; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Фамилия"/>
+                        </f:facet>
+                        <h:outputText value="#{client.secondName}"/>
+                    </p:column>
+                    <p:column style = "font-size: 15px; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Имя"/>
+                        </f:facet>
+                        <h:outputText value="#{client.firstName}"/>
+                    </p:column>
+                    <p:column style = "font-size: 15px; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Отчество"/>
+                        </f:facet>
+                        <h:outputText value="#{client.thirdName}"/>
+                    </p:column>
+                    <p:column style = "font-size: 15px; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value=""/>
+                        </f:facet>
+                        <p:commandButton value="Изменить" action="#{clientsBackBean.changeClient(client)}"/>
+                    </p:column>
+                    <p:column style = "font-size: 15px; text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value=""/>
+                        </f:facet>
+                        <p:commandButton update="clients" value="Удалить" action="#{clientsBackBean.deleteClient(client)}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </div> 
+    </h:form>
+</h:body>
+</html>
