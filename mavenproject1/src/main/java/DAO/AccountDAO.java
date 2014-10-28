@@ -85,6 +85,9 @@ public class AccountDAO extends AbstractDAO<Account>{
             theLogger.info("Transaction begin");
             Query query = em.createNativeQuery("SELECT Auto_increment FROM information_schema.tables WHERE table_name = 'account'");
             long result = (long)query.getSingleResult();
+            if (result < Integer.MIN_VALUE || result > Integer.MAX_VALUE) {
+                throw new IllegalArgumentException (result + "не безопасное приведение типов. Потеря данных!");
+            }
             nextID = (int)result;
             em.getTransaction().commit();
             theLogger.info("Transaction end");
