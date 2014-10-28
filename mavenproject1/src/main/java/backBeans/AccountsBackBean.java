@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -49,6 +50,7 @@ public class AccountsBackBean implements Serializable {
     /**Поле для работы с дао счета*/
     private AccountDAO accountDAO;
     /**Поле для работы с дао клиента*/
+    @EJB
     private ClientDAO clientDAO;
 
     private static final Logger theLogger = Logger.getLogger(ClientsBackBean.class);

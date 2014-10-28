@@ -9,6 +9,9 @@ import Entities.Account;
 import Entities.Client;
 import backBeans.ClientsBackBean;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.ejb.TransactionManagement;
+import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -20,6 +23,8 @@ import org.apache.log4j.Logger;
  * Класс для работы с сущьностью Client.
  * @author Зебер
  */
+@Stateless
+@TransactionManagement(TransactionManagementType.CONTAINER)
 public class ClientDAO extends AbstractDAO<Client>{
 
     private static final Logger theLogger = Logger.getLogger(ClientsBackBean.class);

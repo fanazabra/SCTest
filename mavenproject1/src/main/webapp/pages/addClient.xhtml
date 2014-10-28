@@ -9,6 +9,7 @@
       <h:body>
             <h:form>
                 <div style="position: absolute; top: 20%; left: 40%">
+                    <p:messages style="font-size: 15px;" autoUpdate="true" id="addClientMessages"/>
                     <p:panel style="width: 99%; height: 99%">                       
                         <p:outputLabel style = "font-size: 15px;" value="Идентификатор"/>
                         <br/>
@@ -18,27 +19,26 @@
                         <br/>
                         <p:outputLabel for="sname" style = "font-size: 15px;" value="Фамилия"/>
                         <br/>
-                        <p:inputText id = "sname" required="true" value ="#{clientsBackBean.secondName}"/>
+                        <p:inputText id = "sname" maxlength="50" converter="nameConveter" required="true" value ="#{clientsBackBean.secondName}"/>
                         <br/>
                         <p:message for="sname" display="text"/>
                         <br/>
                         <p:outputLabel for="fname" style = "font-size: 15px;" value="Имя" />
                         <br/>
-                        <p:inputText id="fname" required="true" value ="#{clientsBackBean.firstName}"/>
+                        <p:inputText id="fname" maxlength="50" converter="nameConveter" required="true" validator="nameValidator" value ="#{clientsBackBean.firstName}"/>
                         <br/>
                         <p:message for="fname"/>
                         <br/>
                         <p:outputLabel for="tname" style = "font-size: 15px;" value="Отчество"/>
                         <br/>
-                        <p:inputText id="tname" required="true" value ="#{clientsBackBean.thirdName}"/>
+                        <p:inputText id="tname" maxlength="50" converter="nameConveter" required="true" value ="#{clientsBackBean.thirdName}"/>
                         <br/>
                         <p:message for="tname"/>
                         <br/>
                         <br/>
-                        <p:commandButton style = "width: 105px; font-size: 15px" value="Cохранить" action = "#{clientsBackBean.saveClient}"/>
+                        <p:commandButton style = "width: 105px; font-size: 15px" value="Cохранить" action = "#{clientsBackBean.saveClient}" update="addClientMessages"/>
                         <p:commandButton style = "width: 105px; font-size: 15px" value="Отмена" action = "#{clientsBackBean.cancel()}" immediate="true"/>
                     </p:panel>
-                    <p:messages style="font-size: 15px;" autoUpdate="true" id="adClientMessages"/>
                 </div>
             </h:form>
       </h:body>

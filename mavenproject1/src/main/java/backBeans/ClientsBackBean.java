@@ -9,6 +9,7 @@ import Entities.Client;
 import java.io.Serializable;
 import java.sql.Types;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -36,6 +37,7 @@ public class ClientsBackBean implements Serializable {
     /**Поле для хранения идентификатора изменяемого пользователя*/
     private int idToUpdate;
     /**Поле для работы с дао клиента*/
+    @EJB
     private ClientDAO clientDAO;
     
     private static final Logger theLogger = Logger.getLogger(ClientsBackBean.class);
@@ -55,9 +57,9 @@ public class ClientsBackBean implements Serializable {
     public String addClient() {
         theLogger.info("start method");
         this.id = Types.NULL;
-        this.firstName = "";
-        this.secondName = "";
-        this.thirdName = "";
+        this.firstName = null;
+        this.secondName = null;
+        this.thirdName = null;
         addition = true;
         return "addClient";
     }

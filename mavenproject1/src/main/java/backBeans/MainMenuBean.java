@@ -8,7 +8,6 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 /**
  *
  * @author Зебер

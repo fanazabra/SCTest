@@ -6,9 +6,12 @@
 package DAO;
 
 import backBeans.ClientsBackBean;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import org.apache.log4j.Logger;
 
 /**
@@ -22,6 +25,10 @@ public abstract class AbstractDAO<E> {
      * Поле для работы с EntityManagerfactory.
      */
     EntityManagerFactory emf;
+    
+    @PersistenceContext(unitName = "SCTestNB")
+    EntityManager em1;
+    
     /**
      * Поле для указания класса с которым работаем.
      */
@@ -68,35 +75,23 @@ public abstract class AbstractDAO<E> {
         }
     }
     
+    //В данный момент метод удаления не работеает, так как на нем провожу испытания с JTA
     /**
      * Метод для удаления объекта из базы данных
      * @param id идентификатор объекта для удаления.
      * @throws java.lang.Exception
      */
+    @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void delete(int id) throws Exception {
-        theLogger.info("start method");
-        EntityManager em = emf.createEntityManager();
-        theLogger.info("EntityManager create");
         try
         {
-            em.getTransaction().begin();
-            theLogger.info("Transaction begin");
-            E objToRemove = em.find(entityClass, id);
-            em.remove(objToRemove);
-            em.getTransaction().commit();
-            theLogger.info("Transaction end");
+            E objToRemove = em1.find(entityClass, id);
+            em1.remove(objToRemove);
         } catch (Exception e) {
-            if(em.getTransaction() != null && em.getTransaction().isActive()) {
-               em.getTransaction().rollback();
-               theLogger.info("Transaction rollback");
-            }
             theLogger.info("Exception: " + e);
             System.err.println("Exceprion: " + e);
             throw e;
-        } finally {
-            em.close();
-            theLogger.info("EntityManager close");
-        }
+        } 
     }
     
     /**
