@@ -11,13 +11,13 @@
             <p:panel style="height: 100%; width: 100%;">
                 <div style="height: 20px; width: 50%;position: absolute; top: 1px;">          
                     <h:form>
-                        <p:commandButton style ="width: 96%;" value="Список счетов" action="#{mainMenuBean.getAccountList()}"/>
+                        <p:commandButton style ="width: 96%;" value="Список счетов" action="#{accountsBackBean.toAccounts()}"/>
                     </h:form>
                 </div>
 
                 <div style="width: 50%; height: 20px; position: absolute; left: 50%; top: 1px;">
                     <h:form>
-                        <p:commandButton style ="width: 96%;" value="Список клиентов" action="#{mainMenuBean.getClientList()}"/>
+                        <p:commandButton style ="width: 96%;" value="Список клиентов" action="#{clientsBackBean.toClients()}"/>
                     </h:form>
                  </div> 
             </p:panel>

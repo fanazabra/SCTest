@@ -110,12 +110,16 @@ public class ClientsBackBean implements Serializable {
      * @return {@link #clientsList}
      */
     public List<Client> getClientsList() {
+        return clientsList;          
+    }
+    
+    public String toClients() {
         try {
             clientsList = clientDAO.getAllClients();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, messages.getString("msg.client.listError"),messages.getString("msg.client.listError")));
         } 
-        return clientsList;            
+        return "client";            
     }
 
     /**
@@ -243,7 +247,11 @@ public class ClientsBackBean implements Serializable {
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, messages.getString("msg.client.deleteError"),messages.getString("msg.client.deleteError")));
         }
-        clientsList = getClientsList();
+        try {
+			clientsList = clientDAO.getAllClients();
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, messages.getString("msg.client.listError"),messages.getString("msg.client.listError")));
+		}
         return constants.getString("pages.client");
     }
     
@@ -278,6 +286,11 @@ public class ClientsBackBean implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, messages.getString("msg.client.updateError"),messages.getString("msg.client.updateError")));
             }
         }
+        try {
+			clientsList = clientDAO.getAllClients();
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, messages.getString("msg.client.listError"),messages.getString("msg.client.listError")));
+		}
         return constants.getString("pages.client");
     }
     

@@ -11,6 +11,8 @@ import Entities.Client;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -236,12 +238,16 @@ public class AccountsBackBean implements Serializable {
      * @return {@link #accountList}
      */
     public List<Account> getAccountList() {
+        return accountList;
+    }
+    
+    public String toAccounts() {
         try {
             accountList = accountDAO.getAllAccounts();
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, messages.getString("msg.account.listError"),messages.getString("msg.account.listError")));
         }
-        return accountList;
+        return "account";
     }
 
     /**
@@ -332,6 +338,11 @@ public class AccountsBackBean implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, messages.getString("msg.account.updateError"),messages.getString("msg.account.updateError")));
             }
         }
+        try {
+			accountList = accountDAO.getAllAccounts();
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, messages.getString("msg.account.listError"),messages.getString("msg.account.listError")));
+		}
         return constants.getString("pages.account");
     }
     
@@ -359,14 +370,18 @@ public class AccountsBackBean implements Serializable {
      * @param account Эллемент класса Account в котором хранится информация о текущей строчке таблицы.
      * @return имя страницы для епренаправления.
      */
-    public String deleteAccount(Account account) throws Exception {
+    public String deleteAccount(Account account) {
     	theLogger.info(constants.getString("logger.method.start"));
         try {
             accountDAO.delete(account);
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, messages.getString("msg.account.deleteError"),messages.getString("msg.account.deleteError")));
         }
-        accountList = accountDAO.getAllAccounts();
+        try {
+			accountList = accountDAO.getAllAccounts();
+		} catch (Exception e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, messages.getString("msg.account.listError"),messages.getString("msg.account.listError")));
+		}
         return constants.getString("pages.account");
     }
 }

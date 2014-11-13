@@ -11,13 +11,13 @@
             <p:panel style="height: 100%; width: 100%;">
                 <div style="height: 20px; width: 50%;position: absolute; top: 1px;">          
                     <h:form>
-                        <p:commandButton style ="width: 96%;" value="Список счетов" action="#{mainMenuBean.getAccountList()}"/>
+                        <p:commandButton style ="width: 96%;" value="Список счетов" action="#{accountsBackBean.toAccounts()}"/>
                     </h:form>
                 </div>
 
                 <div style="width: 50%; height: 20px; position: absolute; left: 50%; top: 1px;">
                     <h:form>
-                        <p:commandButton style ="width: 96%;" value="Список клиентов" action="#{mainMenuBean.getClientList()}"/>
+                        <p:commandButton style ="width: 96%;" value="Список клиентов" action="#{clientsBackBean.toClients()}"/>
                     </h:form>
                  </div> 
             </p:panel>
@@ -34,25 +34,25 @@
                     <f:facet name="header">
                         <h:outputText value="Список Клиентов"/>
                     </f:facet>
-                    <p:column style = "font-size: 15px">
+                    <p:column sortBy="#{client.clientId}" style = "font-size: 15px; width: 40px;">
                         <f:facet name="header">
-                            <h:outputText value="Идентификатор"/>
+                            <h:outputText value="Ид"/>
                         </f:facet>
                         <h:outputText value="#{client.clientId}"/>
                     </p:column>
-                    <p:column style = "font-size: 15px; text-align: center">
+                    <p:column sortBy="#{client.secondName}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
                             <h:outputText value="Фамилия"/>
                         </f:facet>
                         <h:outputText value="#{client.secondName}"/>
                     </p:column>
-                    <p:column style = "font-size: 15px; text-align: center">
+                    <p:column sortBy="#{client.firstName}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
                             <h:outputText value="Имя"/>
                         </f:facet>
                         <h:outputText value="#{client.firstName}"/>
                     </p:column>
-                    <p:column style = "font-size: 15px; text-align: center">
+                    <p:column sortBy="#{client.thirdName}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
                             <h:outputText value="Отчество"/>
                         </f:facet>

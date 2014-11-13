@@ -8,17 +8,17 @@
 </h:head>
  
 <h:body>
-    <div style = "height: 35px; width: 96%; position: absolute; top: 1px;">
+   <div style = "height: 35px; width: 96%; position: absolute; top: 1px;">
             <p:panel style="height: 100%; width: 100%;">
                 <div style="height: 20px; width: 50%;position: absolute; top: 1px;">          
                     <h:form>
-                        <p:commandButton style ="width: 96%;" value="Список счетов" action="#{mainMenuBean.getAccountList()}"/>
+                        <p:commandButton style ="width: 96%;" value="Список счетов" action="#{accountsBackBean.toAccounts()}"/>
                     </h:form>
                 </div>
 
                 <div style="width: 50%; height: 20px; position: absolute; left: 50%; top: 1px;">
                     <h:form>
-                        <p:commandButton style ="width: 96%;" value="Список клиентов" action="#{mainMenuBean.getClientList()}"/>
+                        <p:commandButton style ="width: 96%;" value="Список клиентов" action="#{clientsBackBean.toClients()}"/>
                     </h:form>
                  </div> 
             </p:panel>
@@ -35,43 +35,43 @@
                     <f:facet name="header">
                         <h:outputText value="Список Счетов"/>
                     </f:facet>
-                    <p:column style = "font-size: 15px;">
+                    <p:column sortBy="#{account.accountId}" style = "font-size: 15px; width: 40px;">
                         <f:facet name="header">
-                            <h:outputText value="Идентификатор"/>
+                            <h:outputText value="Ид"/>
                         </f:facet>
                         <h:outputText value="#{account.accountId}"/>
                     </p:column>
-                    <p:column style = "font-size: 15px; text-align: center">
+                    <p:column sortBy="#{account.name}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
                             <h:outputText value="Название"/>
                         </f:facet>
                         <h:outputText value="#{account.name}"/>
                     </p:column>
-                    <p:column style = "font-size: 15px; text-align: center">
+                    <p:column sortBy="#{account.total}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
                             <h:outputText value="Сумма"/>
                         </f:facet>
                         <h:outputText value="#{account.total}"/>
                     </p:column>
-                    <p:column style = "font-size: 15px; text-align: center">
+                    <p:column sortBy="#{account.openDate}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
                             <h:outputText value="Дата открытия"/>
                         </f:facet>
                         <h:outputText value="#{account.openDate}"/>
                     </p:column>
-                    <p:column style = "font-size: 15px; text-align: center">
+                    <p:column sortBy="#{account.closeDate}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
                             <h:outputText value="Дата закрытия"/>
                         </f:facet>
                         <h:outputText value="#{account.closeDate}"/>
                     </p:column>
-                    <p:column style = "font-size: 15px; text-align: center">
+                    <p:column sortBy="#{account.state}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
                             <h:outputText value="Статус"/>
                         </f:facet>
                         <h:outputText value="#{account.state}"/>
                     </p:column>
-                    <p:column style = "font-size: 15px; text-align: center">
+                    <p:column sortBy="#{account.clientId.clientId}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
                             <h:outputText value="Клиент"/>
                         </f:facet>
