@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>    
+</h:head>
+ 
+<h:body>   
+    <h:form>
+        <div style="position: relative; top: 0px;">
+            <p:messages style="font-size: 15px;" autoUpdate="true" id="clientMessages"/>
+        </div>
+        <div style = "position: relative; top: 20px; width: 96%; height: 100%">
+            <p:panel style="height: 100%; width: 100%;">
+                <p:commandLink style = "position: absolute; top: 30px; font-size: 12px; left: 30px;" value="Назад" action="#{clientsBackBean.cancel()}"/>
+                <embed style="position: absolute; top: 50px; left: 30px; width: 95%; height: 100%" src="C:/accounts_of_Жогальский_Максим_Викторович.pdf"/> 
+            </p:panel>
+        </div> 
+    </h:form>
+</h:body>
+</html>

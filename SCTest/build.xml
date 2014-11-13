@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SCTest" default="compile">
+
+	<property name="dir.build" value="build"/>		
+	<property name="dir.dist" value="dist"/>
+	<property name="dir.src" value="src"/>
+	<property name="dir.reports" value="${dir.build}/reports"/>
+	<property name="dir.lib" value="lib"/>
+	<property name="application.name" value="SCTest"/>
+	<property name="dir.webContent" value="${dir.dist}/${application.name}"/>
+	<property name="dir.webinf" value="${dir.webContent}/WEB-INF"/>
+	<property name="dir.classes" value="${dir.webinf}/classes"/>
+	<property name="file.war" value="${dir.dist}/SCTest.war"/>
+	
+	<path id = "libs">
+		<fileset dir = "${dir.lib}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="mkdirs">
+		<mkdir dir = "${dir.build}"/>
+		<mkdir dir = "${dir.dist}"/>
+		<mkdir dir = "${dir.webContent}"/>
+		<mkdir dir = "${dir.classes}"/>
+		<mkdir dir = "${dir.reports}"/>
+	</target>
+	
+	<taskdef name="jrc" classname="net.sf.jasperreports.ant.JRAntCompileTask"> 
+	  <classpath refid="libs"/>
+	</taskdef>
+	
+	<target name="compile" depends="mkdirs">
+		<javac srcdir = "${dir.src}" destdir = "${dir.build}">
+			<classpath>
+				<path refid = "libs"/>
+			</classpath>
+		</javac>
+		<jrc 
+		    srcdir="./reports"
+		    destdir="${dir.reports}"
+		    tempdir="${dir.reports}"
+		    keepjava="true"
+		    xmlvalidation="true">
+		   <classpath refid="libs"/>
+		   <include name="**/*.jrxml"/>
+		 </jrc>
+	</target>
+	
+	<target name="clean">
+		<delete dir = "${dir.build}"/>
+		<delete dir = "${dir.dist}"/>
+	</target>
+	
+	<target name="build.webContent" depends="compile">
+		<copy todir="${dir.webContent}" preservelastmodified="true" overwrite="true">
+			<fileset dir = "WebContent"/>
+		</copy>
+		<copy todir="${dir.classes}" preservelastmodified="true" overwrite="true">
+			<fileset dir = "${dir.build}"/>
+			<fileset dir="${dir.src}">
+				<include name = "*.properties"/>
+				<include name = "*.xml"/>
+				<include name = "*.jrxml"/>
+			</fileset>
+	    </copy>
+	</target>
+	
+	<target name="build" depends="build.webContent">
+		<delete file="${file.war}"/>
+		<war
+			compress="true"
+			encoding="utf-8"
+			warfile="${file.war}"
+			webxml="${dir.webinf}/web.xml">
+			<fileset dir="${dir.webContent}" excludes="WEB-INF/web.xml"/>
+		</war>
+	</target>
+</project>
