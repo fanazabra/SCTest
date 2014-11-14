@@ -3,13 +3,13 @@
 
 	<property name="dir.build" value="build"/>		
 	<property name="dir.dist" value="dist"/>
-	<property name="dir.src" value="src"/>
-	<property name="dir.reports" value="${dir.build}/reports"/>
+	<property name="dir.src" value="src/com/softclub/sctest"/>
+	<property name="dir.reports" value="${dir.build}/com/softclub/sctest/reports"/>
 	<property name="dir.lib" value="lib"/>
 	<property name="application.name" value="SCTest"/>
 	<property name="dir.webContent" value="${dir.dist}/${application.name}"/>
 	<property name="dir.webinf" value="${dir.webContent}/WEB-INF"/>
-	<property name="dir.classes" value="${dir.webinf}/classes"/>
+	<property name="dir.classes" value="${dir.webinf}/classes/"/>
 	<property name="file.war" value="${dir.dist}/SCTest.war"/>
 	
 	<path id = "libs">

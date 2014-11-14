@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"         
+      xmlns:p="http://primefaces.org/ui">
+      <link rel="stylesheet" type="text/css" href="myCss.css"/>  
+      
+      <h:head>
+      </h:head>
+      
+      <h:body>
+            <h:form>
+                <div style="position: absolute; top: 20%; left: 40%">
+                    <p:messages style="font-size: 15px;"  autoUpdate="true" id="addClientMessages"/>
+                    <p:panel style="width: 99%; height: 99%">                       
+                        <br/>
+                        <p:outputLabel for="login" style = "font-size: 15px;" value="Логин"/>
+                        <br/>
+                        <p:inputText id = "login" maxlength="50" required="true" value ="#{usersBackBean.login}"/>
+                        <br/>
+                        <p:message for="login" display="text"/>
+                        <br/>
+                        <p:outputLabel for="pass1" style = "font-size: 15px;" value="Пароль" />
+                        <br/>
+                        <p:password id="pass1" label="password 1" maxlength="50" required="true" match="pass2" validatorMessage="#{msg.validationError}"  value ="#{usersBackBean.password}"/> 
+                        <br/>
+                        <p:message for="pass1" showDetail="true"/>
+                        <br/>
+                        <p:outputLabel for="pass2" style = "font-size: 15px;" value="Повторите пароль" />
+                        <br/>
+                        <p:password id="pass2" label="password 2" maxlength="50" required="true" value ="#{usersBackBean.password}"/>
+                        <br/>
+                        <p:message for="pass2" />
+                        <br/>
+                        <br/>
+                        <p:commandButton style = "width: 105px; font-size: 15px" value="Зарегистрироватся" action = "#{usersBackBean.createNewUser()}" update="addClientMessages"/>
+                        <p:commandButton style = "width: 105px; font-size: 15px" value="Отмена" action = "#{usersBackBean.cancel()}" immediate="true"/>
+                    </p:panel>
+                </div>
+            </h:form>
+      </h:body>
+</html>

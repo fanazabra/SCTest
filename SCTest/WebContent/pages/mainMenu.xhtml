@@ -7,20 +7,49 @@
 </h:head>
  
 <h:body>
-    <div style = "height: 35px; width: 96%; position: absolute; top: 1px;">
-            <p:panel style="height: 100%; width: 100%;">
-                <div style="height: 20px; width: 50%;position: absolute; top: 1px;">          
+	<h:form rendered="#{usersBackBean.logined eq true ? false : true}">
+	    <div style="position: relative; height: 40px;">
+	        <p:panel id = "loginPanel" style="width: 750px; height: 99%">                       
+	            <p:outputLabel style = "font-size: 15px;" value="Логин"/>
+	            <p:spacer width="10"></p:spacer>
+	            <p:inputText style="height: 20px; width: 150px; font-size: 15px;" id="userId" required="true" value ="#{usersBackBean.login}"/>
+	            <p:spacer width="10"></p:spacer>
+	            <p:outputLabel for="password" style = "font-size: 15px;" value="Пароль  "/>
+	            <p:spacer width="10"></p:spacer>
+	            <p:password style="height: 20px; width: 150px; font-size: 15px;" id = "password" maxlength="50" required="true" value ="#{usersBackBean.password}"/>
+	            <p:spacer width="10"></p:spacer>
+	            <p:commandButton style = "width: 105px; font-size: 15px;" value="Войти" action = "#{usersBackBean.login()}" update="@all"/>
+	            <p:spacer width="10"></p:spacer>
+	            <p:commandButton style = "width: 130px; font-size: 15px;" value="Регистрация" action = "#{usersBackBean.registration()}" immediate="true"/>
+	        </p:panel>
+	    </div>
+	</h:form>
+	
+	<h:form rendered="#{usersBackBean.logined eq true ? true : false}">
+	    <div style="position: relative; height: 40px; width: 100%">
+	        <p:panel id = "userPanel" style="width: 200px; height: 99%">                       
+	            <p:outputLabel style = "font-size: 15px;" value="#{usersBackBean.login}"/>
+	            <p:spacer width="10"></p:spacer>
+	            <p:commandButton style = "width: 105px; font-size: 15px;" value="Выйти" action = "#{usersBackBean.logout()}" update="@all"/>
+	        </p:panel>
+	    </div>
+	</h:form>
+	
+    <div style = "height: 36px; position: absolute; width: 100%">
+            <p:panel style="height: 99%; width: 99%;">
+                <div style="height: 20px; width: 50%;position: absolute; top: 1px; padding-top: 2;">          
                     <h:form>
                         <p:commandButton style ="width: 96%;" value="Список счетов" action="#{accountsBackBean.toAccounts()}"/>
                     </h:form>
                 </div>
 
-                <div style="width: 50%; height: 20px; position: absolute; left: 50%; top: 1px;">
+                <div style="width: 50%; height: 20px; position: absolute; left: 50%; top: 1px; padding-top: 2;">
                     <h:form>
                         <p:commandButton style ="width: 96%;" value="Список клиентов" action="#{clientsBackBean.toClients()}"/>
                     </h:form>
                  </div> 
             </p:panel>
     </div>
+    <p:messages style="position: relative;font-size: 15px;" autoUpdate="true" id="loginMessages"/>
 </h:body>
 </html>
