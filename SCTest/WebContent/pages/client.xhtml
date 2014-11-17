@@ -10,17 +10,17 @@
 	<h:form rendered="#{usersBackBean.logined eq true ? false : true}">
 	    <div style="position: relative; height: 40px;">
 	        <p:panel id = "loginPanel" style="width: 750px; height: 99%">                       
-	            <p:outputLabel style = "font-size: 15px;" value="Логин"/>
+	            <p:outputLabel style = "font-size: 15px;" value="#{msg.log}"/>
 	            <p:spacer width="10"></p:spacer>
 	            <p:inputText style="height: 20px; width: 150px; font-size: 15px;" id="userId" required="true" value ="#{usersBackBean.login}"/>
 	            <p:spacer width="10"></p:spacer>
-	            <p:outputLabel for="password" style = "font-size: 15px;" value="Пароль  "/>
+	            <p:outputLabel for="password" style = "font-size: 15px;" value="#{msg.pass}"/>
 	            <p:spacer width="10"></p:spacer>
 	            <p:password style="height: 20px; width: 150px; font-size: 15px;" id = "password" maxlength="50" required="true" value ="#{usersBackBean.password}"/>
 	            <p:spacer width="10"></p:spacer>
-	            <p:commandButton style = "width: 105px; font-size: 15px;" value="Войти" action = "#{usersBackBean.login()}" update="@all"/>
+	            <p:commandButton style = "width: 105px; font-size: 15px;" value="#{msg.login}" action = "#{usersBackBean.login()}" update="@all"/>
 	            <p:spacer width="10"></p:spacer>
-	            <p:commandButton style = "width: 130px; font-size: 15px;" value="Регистрация" action = "#{usersBackBean.registration()}" immediate="true"/>
+	            <p:commandButton style = "width: 130px; font-size: 15px;" value="#{msg.registration}" action = "#{usersBackBean.registration()}" immediate="true"/>
 	        </p:panel>
 	    </div>
 	</h:form>
@@ -30,22 +30,22 @@
 	        <p:panel id = "userPanel" style="width: 200px; height: 99%">                       
 	            <p:outputLabel style = "font-size: 15px;" value="#{usersBackBean.login}"/>
 	            <p:spacer width="10"></p:spacer>
-	            <p:commandButton style = "width: 105px; font-size: 15px;" value="Выйти" action = "#{usersBackBean.logout()}" update="@all"/>
+	            <p:commandButton style = "width: 105px; font-size: 15px;" value="#{msg.logout}" action = "#{usersBackBean.logout()}" update="@all"/>
 	        </p:panel>
 	    </div>
 	</h:form>
 	
-    <div style = "height: 36px; position: absolute; width: 100%">
+   <div style = "height: 36px; position: absolute; width: 100%">
             <p:panel style="height: 99%; width: 99%;">
                 <div style="height: 20px; width: 50%;position: absolute; top: 1px; padding-top: 2;">          
                     <h:form>
-                        <p:commandButton style ="width: 96%;" value="Список счетов" action="#{accountsBackBean.toAccounts()}"/>
+                        <p:commandButton style ="width: 96%;" value="#{msg.accountList}" action="#{accountsBackBean.toAccounts()}"/>
                     </h:form>
                 </div>
 
                 <div style="width: 50%; height: 20px; position: absolute; left: 50%; top: 1px; padding-top: 2;">
                     <h:form>
-                        <p:commandButton style ="width: 96%;" value="Список клиентов" action="#{clientsBackBean.toClients()}"/>
+                        <p:commandButton style ="width: 96%;" value="#{msg.clientList}" action="#{clientsBackBean.toClients()}"/>
                     </h:form>
                  </div> 
             </p:panel>
@@ -57,52 +57,52 @@
         </div>
         <div style = "position: relative; top: 50px; width: 96%; height: 100%">
             <p:panel style="height: 100%; width: 100%;">
-                <p:commandButton rendered="#{usersBackBean.access eq 5 ? true : false}" style = "width: 200px; font-size: 12px; left: 80%;" value="Добавить клиента" action="#{clientsBackBean.addClient}"/>
+                <p:commandButton rendered="#{usersBackBean.access eq 5 ? true : false}" style = "width: 200px; font-size: 12px; left: 80%;" value="#{msg.addClient}" action="#{clientsBackBean.addClient}"/>
                 <p:dataTable paginator="true" rows="10" id = "clients" style = "position: absolute; top: 55px; width: 96%;" value= "#{clientsBackBean.clientsList}" var="client">                       
                     <f:facet name="header">
-                        <h:outputText value="Список Клиентов"/>
+                        <h:outputText value="#{msg.clientList}"/>
                     </f:facet>
                     <p:column sortBy="#{client.clientId}" style = "font-size: 15px; width: 40px;">
                         <f:facet name="header">
-                            <h:outputText value="Ид"/>
+                            <h:outputText value="#{msg.id}"/>
                         </f:facet>
                         <h:outputText value="#{client.clientId}"/>
                     </p:column>
                     <p:column sortBy="#{client.secondName}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
-                            <h:outputText value="Фамилия"/>
+                            <h:outputText value="#{msg.secondName}"/>
                         </f:facet>
                         <h:outputText value="#{client.secondName}"/>
                     </p:column>
                     <p:column sortBy="#{client.firstName}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
-                            <h:outputText value="Имя"/>
+                            <h:outputText value="#{msg.firstName}"/>
                         </f:facet>
                         <h:outputText value="#{client.firstName}"/>
                     </p:column>
                     <p:column sortBy="#{client.thirdName}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
-                            <h:outputText value="Отчество"/>
+                            <h:outputText value="#{msg.thirdName}"/>
                         </f:facet>
                         <h:outputText value="#{client.thirdName}"/>
                     </p:column>
-                    <p:column rendered="#{usersBackBean.access eq 5 ? true : false}" style = "font-size: 15px; text-align: center">
+                    <p:column rendered="#{usersBackBean.admin eq true ? true : false}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
                             <h:outputText value=""/>
                         </f:facet>
-                        <p:commandLink value="Изменить" action="#{clientsBackBean.changeClient(client)}"/>
+                        <p:commandLink value="#{msg.update}" action="#{clientsBackBean.changeClient(client)}"/>
                     </p:column>
-                    <p:column rendered="#{usersBackBean.access eq 5 ? true : false}" style = "font-size: 15px; text-align: center">
+                    <p:column rendered="#{usersBackBean.admin eq true ? true : false}" style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
                             <h:outputText value=""/>
                         </f:facet>
-                        <p:commandLink update="clients" value="Удалить" action="#{clientsBackBean.deleteClient(client)}"/>
+                        <p:commandLink update="clients" value="#{msg.delete}" action="#{clientsBackBean.deleteClient(client)}"/>
                     </p:column>
                     <p:column style = "font-size: 15px; text-align: center">
                         <f:facet name="header">
                             <h:outputText value=""/>
                         </f:facet>
-                        <p:commandLink value="Счета" action="#{clientsBackBean.getAccountsForClient(client)}" ajax="false" immediate="false" />  
+                        <p:commandLink value="#{msg.getAccounts}" action="#{clientsBackBean.getAccountsForClient(client)}" ajax="false" immediate="false" />  
                     </p:column>
                 </p:dataTable>
             </p:panel>

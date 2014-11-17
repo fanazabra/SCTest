@@ -30,6 +30,7 @@ public class UsersBackBean implements Serializable {
 	private boolean logined = false;
 	private ResourceBundle messages = MessagesController.getBundle();
     private ResourceBundle constants = ConstantsController.getBundle();
+    private boolean admin = false;
     
     private static final Logger theLogger = Logger.getLogger(UsersBackBean.class);
 	
@@ -77,11 +78,25 @@ public class UsersBackBean implements Serializable {
 		this.logined = logined;
 	}
 
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
 	public String login() {
 		boolean valid = Validate(login, password);
 		if(valid)
 		{
 			logined = true;
+			if(access.equals(5)) {
+				admin = true;
+			}
+			else {
+				admin = false;
+			}
 		} 
 		else {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, messages.getString("msg.user.userNotValid"),messages.getString("msg.user.userNotValid")));
@@ -91,6 +106,7 @@ public class UsersBackBean implements Serializable {
 	
 	public String logout() {
 		logined = false;
+		admin = false;
 		return constants.getString("pages.mainMenu");
 	}
 	

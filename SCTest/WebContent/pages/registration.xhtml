@@ -12,27 +12,27 @@
                     <p:messages style="font-size: 15px;"  autoUpdate="true" id="addClientMessages"/>
                     <p:panel style="width: 99%; height: 99%">                       
                         <br/>
-                        <p:outputLabel for="login" style = "font-size: 15px;" value="Логин"/>
+                        <p:outputLabel for="login" style = "font-size: 15px;" value="#{msg.log}"/>
                         <br/>
-                        <p:inputText id = "login" maxlength="50" required="true" value ="#{usersBackBean.login}"/>
+                        <p:inputText id = "login" maxlength="50" required="true" requiredMessage="#{msg.required}" value ="#{usersBackBean.login}"/>
                         <br/>
                         <p:message for="login" display="text"/>
                         <br/>
-                        <p:outputLabel for="pass1" style = "font-size: 15px;" value="Пароль" />
+                        <p:outputLabel for="pass1" style = "font-size: 15px;" value="#{msg.pass}" />
                         <br/>
-                        <p:password id="pass1" label="password 1" maxlength="50" required="true" match="pass2" validatorMessage="#{msg.validationError}"  value ="#{usersBackBean.password}"/> 
+                        <p:password id="pass1" label="password 1" maxlength="50" required="true" requiredMessage="#{msg.required}" match="pass2" validatorMessage="#{msg.validationError}"  value ="#{usersBackBean.password}"/> 
                         <br/>
                         <p:message for="pass1" showDetail="true"/>
                         <br/>
-                        <p:outputLabel for="pass2" style = "font-size: 15px;" value="Повторите пароль" />
+                        <p:outputLabel for="pass2" style = "font-size: 15px;" value="#{msg.secondPass}" />
                         <br/>
-                        <p:password id="pass2" label="password 2" maxlength="50" required="true" value ="#{usersBackBean.password}"/>
+                        <p:password id="pass2" label="password 2" maxlength="50" required="true" requiredMessage="#{msg.required}" value ="#{usersBackBean.password}"/>
                         <br/>
                         <p:message for="pass2" />
                         <br/>
                         <br/>
-                        <p:commandButton style = "width: 105px; font-size: 15px" value="Зарегистрироватся" action = "#{usersBackBean.createNewUser()}" update="addClientMessages"/>
-                        <p:commandButton style = "width: 105px; font-size: 15px" value="Отмена" action = "#{usersBackBean.cancel()}" immediate="true"/>
+                        <p:commandButton style = "width: 105px; font-size: 15px" value="#{msg.makeRegistration}" action = "#{usersBackBean.createNewUser()}" update="addClientMessages"/>
+                        <p:commandButton style = "width: 105px; font-size: 15px" value="#{msg.cancel}" action = "#{usersBackBean.cancel()}" immediate="true"/>
                     </p:panel>
                 </div>
             </h:form>
